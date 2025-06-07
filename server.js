@@ -1,14 +1,27 @@
 import http from 'http';
 
-const port = 2000
+
+const PORT = process.env.PORT;
 
 const server = http.createServer((req, res) => {
-    res.setHeader('Content-Type', 'text/html');
-        res.write('<h1>This is my first Server</h1>');
-        res.end();
+    if (req.url === '/'){
+        res.writeHead(200, {'Content-Type' :'text/html'});
+        
+        res.end('<h1>This is The HOME PAGE</h1>');
+    }else if (req.url === '/about'){
+        res.writeHead(200, {'Content-Type' :'text/html'});
+    
+        res.end('<h1>This is THE ABOUT PAGE</h1>');
+    }else{
+        res.writeHead(404, {'Content-Type' :'text/html'});
+        
+        res.end('<h1>PAGE NOT FOUND</h1>');
+    }
+    
+
 
 });
 
-server.listen(port , () => {
-    console.log(`server is listening on port ${port}`)
+server.listen(PORT , () => {
+    console.log(`server is listening on port ${PORT}`)
 }); 
