@@ -14,7 +14,7 @@ const server = createServer((req, res) => {
         jsonMiddleware(req, res, () =>{
             if (req.url === '/api/users' && req.method === 'GET'){
                 getUsers(req, res);
-            }else if (req.url.match('/\/api\/users\/([0-9]+)/') && req.method === 'GET'){
+            }else if (req.url.match(/\/api\/users\/([0-9]+)/) && req.method === 'GET'){
                 getUserById( req, res);
             }else {
                 notFound(req, res);
