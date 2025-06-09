@@ -1,10 +1,36 @@
-// import {randomNum, degCtoDegF} from "./utils.js"
-// import getPost, {postLenght} from "./post.controller.js"
+import http, { createServer } from 'http';
+import { logger } from './middleware/loggerMiddleware.js';
+import { jsonMiddleware } from './middleware/jsonMiddleware.js';
+import { getUsers } from './handlers/userHandler.js';
+import { getUserById } from './handlers/userIdHandler.js';
+import { notFound } from './handlers/errorHandler.js';
 
-// console.log(`the random number is : ${randomNum()}`);
+const PORT = process.env.PORT;
 
-// console.log(`converting random temp in celcius to f: ${degCtoDegF(-10)}`);
+const users  = [
+    {id:1, name: 'John Doe'},
+    {id:2, name: 'Jane Doe'},
+    {id:3, name: 'Jack Doe'},
+    {id:4, name: 'Jill Doe'},
+];
 
 
-// console.log(getPost());
-// console.log(`the lenght of the post is: ${postLenght()}`);
+const server = createServer((req, res) => {
+    logger(req, res, () => {
+        jsonMiddleware(req, res, () =>{
+            if (req.url === '/api/users' && req.method === 'GET'){
+                getUsers(req, res);
+            }else if (req.url.match('/\/api\/users\/([0-9]+)/') && req.method === 'GET'){
+                getUserById( req, res);
+            }else {
+                notFound(req, res);
+
+            }
+        });
+    });
+
+});
+
+server.listen(PORT, () => {
+    console.log(`Server in listening on ${PORT}`);
+});
