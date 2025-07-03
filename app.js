@@ -19,7 +19,7 @@ const server = createServer((req, res) => {
                 getUserById( req, res);
             }else if (req.url === '/api/users' && req.method === 'POST'){
                 createUser(req, res);
-            } {
+            }else {
                 notFound(req, res);
 
             }
