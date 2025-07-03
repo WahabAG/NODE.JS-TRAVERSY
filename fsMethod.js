@@ -30,4 +30,30 @@ const readFile = async () => {
     }
 };
 
+// writeFile
+const writeFile = async () => {
+    try {
+        await fs.writeFile("./public/file.txt", "I am overwriting the content of thi file");
+        console.log("file ritten into");
+    } catch (error) {
+        console.log(error);
+    }
+
+};
+
+//appending file
+const appendFile = async () => {
+    try {
+        await fs.appendFile("./public/file.txt", "\nI just wanna keep adding stuffs to this file");
+    console.log("file appended")
+    } catch (error) {
+        console.log(error);
+    }
+
+};
+writeFile();
+appendFile();
 readFile();
+
+
+
