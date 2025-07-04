@@ -1,5 +1,4 @@
-/* Thi file is meant to be used for practice
-the HTTP FS module and methods*/
+/* Thi file is meant to be used for practice the HTTP FS module and methods */
 
 
 import fs  from "fs/promises";
