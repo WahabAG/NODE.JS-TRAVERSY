@@ -5,12 +5,14 @@ import { getUsers } from './handlers/userHandler.js';
 import { getUserById } from './handlers/userIdHandler.js';
 import { notFound } from './handlers/errorHandler.js';
 import { createUser } from './handlers/createUserHandler.js';
+import { myEmitter } from './handlers/eventHandler.js';
 
 const PORT = process.env.PORT;
 
 
 
 const server = createServer((req, res) => {
+    myEmitter.emit("greet", " WAG");
     logger(req, res, () => {
         jsonMiddleware(req, res, () =>{
             if (req.url === '/api/users' && req.method === 'GET'){
@@ -25,6 +27,7 @@ const server = createServer((req, res) => {
             }
         });
     });
+    myEmitter.emit("goodbye", " WAG");
 
 });
 
